@@ -6,7 +6,7 @@
 ### babel过程
 1. 使用@babel/parser对代码做词法和语法分析，构建AST抽象语法树。
 2. 在使用@babel/traverse对AST抽象语法树进行深度优先遍历，此过程也是babel插件介入的时机，可以对AST节点进行新增、移除和更新操作
-3. 最后使用@babel/generrater将AST抽象语法树转换为js代码
+3. 最后使用@babel/generater将AST抽象语法树转换为js代码
 
 
 ## webpack打包过程

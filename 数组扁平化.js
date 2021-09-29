@@ -3,10 +3,11 @@
 let arr = [1, 2, 3, [4, 5], 6]
 
 //第一种递归实现
-function flatten(arr) {
+function flatten(arr, deep) {
+    if (deep <= 0) return arr;
     let res = [];
     for (let key of arr) {
-        res = res.concat(Array.isArray(key) ? flatten(key) : key)
+        res = res.concat(Array.isArray(key) ? flatten(key) : key);
     }
     return res
 }
@@ -26,7 +27,7 @@ function flatten3(arr) {
 }
 
 
-let r = flatten(arr);
+let r = flatten(arr, 0);
 
 
 
