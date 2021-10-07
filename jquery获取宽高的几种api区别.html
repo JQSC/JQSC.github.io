@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper {
+            background-color: blueviolet;
+            width: 400px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: brown;
+            margin: 10px auto;
+            padding: 20px;
+            border: 10px solid darkgoldenrod;
+            word-wrap: break-word;
+            overflow-y: scroll;
+            box-sizing: border-box;
+        }
+
+        #test2 {
+            width: 140px;
+            background-color: aqua;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="box" id="test">texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext</div>
+        <div class="" id="test2">texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext</div>
+
+    </div>
+
+    <script>
+
+        window.onload = function () {
+            var el = document.getElementById('test');
+            console.log('width: ', el.style.width);
+            console.log('clientWidth: ', el.clientWidth);
+            console.log('offsetWidth: ', el.offsetWidth);
+            console.log('scrollWidth: ', el.scrollWidth);
+            console.log('getBoundingClientRect: ', el.getBoundingClientRect());
+            console.log('getClientRects : ', el.getClientRects());
+            var $el = $('#test');
+            console.log('width: ', $el.width())
+            console.log('innerWidth: ', $el.innerWidth())
+            console.log('outerWidth: ', $el.outerWidth())
+
+
+        }
+
+    </script>
+
+    <script src="jquery-3.5.1/jquery-3.5.1.js"></script>
+</body>
+
+</html>
