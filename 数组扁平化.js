@@ -26,8 +26,24 @@ function flatten3(arr) {
 }
 
 
-let r = flatten(arr);
+let r = flatten2([1, 2, [3, [4, 5]]]);
 
 
 
-console.log(r)
+function flatten4(arr, deep) {
+    console.log('deep',deep);
+    
+    if (deep <= 0) return arr
+    let res = [];
+    for (let key of arr) {
+        console.log('key',key);
+        
+        res = res.concat(Array.isArray(key) ? flatten4(key, deep - 1) : key);
+    }
+    return res
+}
+
+
+let s=flatten4([1, 2, [3, [4, 5]]],1);
+
+console.log(s);
