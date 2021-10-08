@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import List from './无限滚动/index';
+import List from './list/index';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
