@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import { Button } from 'antd'
+import { useState } from 'react'
 
 function getDateNow() {
     return performance.now()
@@ -30,7 +29,7 @@ function LazyRender() {
     const add = () => {
         const startTime = getDateNow();
         console.log('start', startTime)
-        setData( createItem(10000));
+        setData(createItem(10000));
         //legacy模式下setTimeout在浏览器下一帧执行
         setTimeout(() => {
             const endTime = getDateNow();
@@ -38,22 +37,20 @@ function LazyRender() {
         })
     }
 
-    useEffect(() => {
+    const onScroll = (e) => {
+        const continer = e.target;
+        const maxScrollTop = continer.scrollHeight - continer.offsetHeight;
+        const currentScrollTop = continer.scrollTop;
 
-        window.onscroll = function () {
-            const maxScrollTop = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight) - window.innerHeight;
-            const currentScrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
-            if (maxScrollTop - currentScrollTop < 20) {
-                setData([...data, ...createItem(20)])
-            }
+        if (maxScrollTop - currentScrollTop < 20) {
+            setData([...data, ...createItem(20)])
         }
-
-    }, [data])
+    }
 
     return (
         <div>
             <button onClick={add}>添加1000条数据计算渲染用时</button>
-            <div className={'async-list'}>
+            <div className={'async-list'} onScroll={onScroll}>
                 {
                     data.map((item, i) => {
                         return <div className={'async-list-item'} style={{ backgroundColor: item.bg }} key={i}>item-{i}</div>

@@ -47,8 +47,6 @@ function View() {
 
     useEffect(
         () => {
-            console.log(222222222);
-            
             const { start, end } = position
             setCurrentData(data.slice(start, end + 1))
         },
