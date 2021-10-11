@@ -39,7 +39,9 @@ function LazyRender() {
 
     const onScroll = (e) => {
         const continer = e.target;
-        const maxScrollTop = continer.scrollHeight - continer.offsetHeight;
+        //clientHeight包含padding
+        //offsetHeight包含padding + bordr +滚动条
+        const maxScrollTop = continer.scrollHeight - continer.clientHeight;
         const currentScrollTop = continer.scrollTop;
 
         if (maxScrollTop - currentScrollTop < 20) {
