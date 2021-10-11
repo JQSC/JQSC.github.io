@@ -37,33 +37,41 @@ function View() {
 
     const onScroll = (e) => {
         const currentScrollTop = e.target.scrollTop;
-        let fixedScrollTop = 0 //currentScrollTop - currentScrollTop % 60;
+        let startIndex = findNearestItemIndex(currentScrollTop)
+        let endIndex = findNearestItemIndex(currentScrollTop + viewHeight);
 
-        let startHeight = 0;
-        let endHeight = 0;
-        let startIndex = 0;
-        let endIndex = 0;
-        for (let item of data) {
-            //缓存每一个子项高度到列表项中
-            startHeight += item.height;
-            if (startHeight >= currentScrollTop && !startIndex) {
-                startIndex = item.index;
-                fixedScrollTop = currentScrollTop + ( startHeight - currentScrollTop)
+
+        let total = 0;
+        for (let i = 0, j = startIndex; i <= j; i++) {
+            let item = data[i];
+
+            if (i === j) {
+               break
             }
-            if (startHeight >= currentScrollTop) {
-                endHeight += item.height;
-            }
-            if (endHeight > viewHeight && !endIndex) {
-                endIndex = item.index;
-            }
+            total += item.height;
         }
+
 
         setViewData(data.slice(startIndex, endIndex + 1))
 
 
-        ref.current.style.transform = `translate3d(0, ${currentScrollTop}px, 0)`
+        ref.current.style.transform = `translate3d(0, ${total}px, 0)`
 
     }
+
+
+    function findNearestItemIndex(scrollHeight) {
+        let total = 0;
+        for (let i = 0, j = data.length; i < j; i++) {
+            let item = data[i];
+            total += item.height;
+            if (total >= scrollHeight || i === j - 1) {
+                return i
+            }
+        }
+        return 0
+    }
+
 
     //模拟异步获取数据
     useEffect(() => {
