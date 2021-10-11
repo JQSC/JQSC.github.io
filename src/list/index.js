@@ -8,7 +8,7 @@ function List() {
 
     return (
         <div className={'list'}>
-            <Tabs defaultActiveKey="1" >
+            <Tabs defaultActiveKey="2" >
                 <TabPane tab="延迟渲染" key="1">
                     <LazyRender />
                 </TabPane>

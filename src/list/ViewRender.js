@@ -20,47 +20,87 @@ function createItem(size) {
 
 function View() {
 
-    const [data, setData] = useState(createItem(1000));
-
-    const ref=useRef();
-
+    const [data, setData] = useState([]);
+    //可视区高度
+    const viewHeight = 600;
+    //可视区子项列表
+    const [viewData, setViewData] = useState([]);
+    //可视区子项起始、终止位置；
     const [position, setPosition] = useState({
-        start: 0,
-        end: 15
+        startIndex: 0,
+        endIndex: 0
     })
+    //滚动高度
+    const [contentHeight, setContentHeight] = useState(0)
 
-    const [currentData, setCurrentData] = useState([]);
+    const ref = useRef();
 
     const onScroll = (e) => {
         const currentScrollTop = e.target.scrollTop;
-        const fixedScrollTop = currentScrollTop - currentScrollTop % 60;
-        const start = Math.floor(currentScrollTop / 60);
-        const end = start + 15;
-        ref.current.style.transform=`translate3d(0, ${fixedScrollTop}px, 0)`
-        setPosition({
-            start,
-            end
-        })
+        let fixedScrollTop = 0 //currentScrollTop - currentScrollTop % 60;
 
+        let startHeight = 0;
+        let endHeight = 0;
+        let startIndex = 0;
+        let endIndex = 0;
+        for (let item of data) {
+            //缓存每一个子项高度到列表项中
+            startHeight += item.height;
+            if (startHeight >= currentScrollTop && !startIndex) {
+                startIndex = item.index;
+                fixedScrollTop = currentScrollTop + ( startHeight - currentScrollTop)
+            }
+            if (startHeight >= currentScrollTop) {
+                endHeight += item.height;
+            }
+            if (endHeight > viewHeight && !endIndex) {
+                endIndex = item.index;
+            }
+        }
+
+        setViewData(data.slice(startIndex, endIndex + 1))
+
+
+        ref.current.style.transform = `translate3d(0, ${currentScrollTop}px, 0)`
 
     }
 
-    useEffect(
-        () => {
-            const { start, end } = position
-            setCurrentData(data.slice(start, end + 1))
-        },
-        [data, position,]
-    )
-
+    //模拟异步获取数据
+    useEffect(() => {
+        setTimeout(() => {
+            let resData = createItem(1000);
+            //初始化viewData和contentHeight
+            let totalHeight = 0;
+            let startIndex = 0;
+            let endIndex = 0;
+            for (let item of resData) {
+                //高度算法暂用序号加固定高度
+                let itemHeight = item.index + 60;
+                item.height = itemHeight;
+                //缓存每一个子项高度到列表项中
+                totalHeight += itemHeight;
+                if (totalHeight > viewHeight && !endIndex) {
+                    endIndex = item.index;
+                }
+            }
+            setViewData(resData.slice(startIndex, endIndex + 1))
+            setPosition({
+                startIndex,
+                endIndex
+            })
+            setContentHeight(totalHeight);
+            setData(resData);
+        }, 1000)
+    }, [])
 
     return (
-        <div className={'view-list'} onScroll={onScroll}>
-            <div className={'continer-wrapper'} style={{ height: data.length * 60 }}></div>
+        <div className={'view-list'} style={{ height: viewHeight }} onScroll={onScroll}>
+            <div className={'continer-wrapper'} style={{ height: contentHeight }}></div>
             <div className={'continer-content'} ref={ref}>
                 {
-                    currentData.map((item, i) => {
-                        return <div className={'view-list-item'} style={{ backgroundColor: item.bg }} key={i}>item-{item.index}</div>
+                    viewData.map((item, i) => {
+                        const { bg, height, index } = item;
+                        return <div className={'view-list-item'} style={{ backgroundColor: bg, height }} key={i}>item-{index}</div>
                     })
                 }
             </div>
