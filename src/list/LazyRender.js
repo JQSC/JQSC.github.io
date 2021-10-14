@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 function getDateNow() {
     return performance.now()
@@ -22,9 +22,17 @@ function createItem(size) {
     return list
 }
 
+
+const viewHeight = 600;
+
+//子项最低高度为60,多加载4项，防止过快滚动白屏
+const minCount = parseInt(viewHeight / 60) + 4;
+
 function LazyRender() {
 
-    const [data, setData] = useState(createItem(20))
+    const [data, setData] = useState(createItem(50))
+
+    const [currentIndex, setCurrentIndex] = useState(0)
 
     const add = () => {
         const startTime = getDateNow();
@@ -38,6 +46,8 @@ function LazyRender() {
     }
 
     const onScroll = (e) => {
+        if (currentIndex >= (data.length - 1)) return;
+
         const continer = e.target;
         //clientHeight包含padding
         //offsetHeight包含padding + bordr +滚动条
@@ -45,16 +55,26 @@ function LazyRender() {
         const currentScrollTop = continer.scrollTop;
 
         if (maxScrollTop - currentScrollTop < 20) {
-            setData([...data, ...createItem(20)])
+            setCurrentIndex(minCount + currentIndex);
         }
     }
+
+
+    useEffect(
+        () => {
+            setCurrentIndex(minCount);
+        },
+        [data]
+    )
+
+    const currentList = data.slice(0, currentIndex);
 
     return (
         <div>
             <button onClick={add}>添加1000条数据计算渲染用时</button>
-            <div className={'async-list'} onScroll={onScroll}>
+            <div className={'async-list'} style={{ height: viewHeight }} onScroll={onScroll}>
                 {
-                    data.map((item, i) => {
+                    currentList.map((item, i) => {
                         return <div className={'async-list-item'} style={{ backgroundColor: item.bg }} key={i}>item-{i}</div>
                     })
                 }

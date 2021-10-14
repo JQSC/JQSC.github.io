@@ -4,7 +4,6 @@
     margin: 0 auto
     .async-list
         position relative
-        height: 600px
         overflow-y: auto
         margin-top: 10px;
         .async-list-item
@@ -13,20 +12,21 @@
             line-height: 50px
             text-align: center
             font-weight: bold
-    .view-list
+    .view-list-wrapper
         position relative
-        overflow-y: auto
-        .continer-wrapper
+        .view-list
+            margin-top: 10px
             position relative
-        .continer-content
-            position: absolute
-            top: 0
-            bottom: 0
-            left: 0
-            right: 0       
-            .view-list-item
-                margin: 10px
-                height: 50px
-                line-height: 50px
-                text-align: center
-                font-weight: bold
+            overflow-y: auto
+            .continer-wrapper
+                position relative
+            .continer-content
+                position: absolute
+                top: 0
+                bottom: 0
+                left: 0
+                right: 0       
+                .view-list-item
+                    margin: 10px
+                    text-align: center
+                    font-weight: bold

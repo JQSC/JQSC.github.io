@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import List from './list/index';
+import Router from './router/index';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <List />
+    <Router />
   </React.StrictMode>,
   document.getElementById('root')
 );
