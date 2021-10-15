@@ -3,106 +3,48 @@ import {
     Switch,
     Route,
     Link,
-    useParams
 } from "react-router-dom";
-import { useState, useEffect } from 'react'
+import { useState, useRef, forwardRef } from 'react';
+import { menuConfig } from './mock'
+import routerConfig from './router.config'
+import RouterBefore from './routerBefore'
+import Tabs from './tabs'
+
 import './index.styl'
 
+const TabsRef = forwardRef(Tabs);
 
-const routerConfig = [
-    {
-        path: '/request/:processKey',
-        component: RequestComp,
-        text: '包含process'
-    },
-    {
-        path: '/:id(create|edit)/:id?',
-        component: ComponentText,
-        text: 'create或者edite'
-    },
-    {
-        path: '*',
-        component: ComponentText,
-        text: '匹配不到的情况'
-    }
-]
+function App() {
 
-
-const menuConfig = [
-    {
-        url: '/', name: 'Home'
-    },
-    {
-        url: '/create', name: '导航create'
-    },
-    {
-        url: '/create/123', name: '导航create带id'
-    },
-    {
-        url: '/edit', name: '导航edit'
-    },
-    {
-        url: '/a/d/c?process=2', name: '异步加载'
-    },
-    {
-        url: '/123123213', name: '不存在导航'
-    }
-]
-
-function RouterComp() {
+    const tabsRef = useRef();
 
     return (
         <div className={'router'}>
             <Router>
-                {
-                    menuConfig.map((item, i) => {
-                        const { url, name } = item;
-                        return <h2 key={i}><Link to={formatUrl(url)} >{name}</Link></h2>
-                    })
-                }
-                <Switch>
+                <div className={'menu'}>
                     {
-                        routerConfig.map((routeConfig, i) => {
-                            const { path, component: ComponentWrapper, text } = routeConfig;
-                            return <Route key={i} path={path} render={() => <ComponentWrapper text={text} />} />
+                        menuConfig.map((item, i) => {
+                            const { url, title } = item;
+                            return <h2 key={i}><Link to={url} >{title}</Link></h2>
                         })
                     }
+                </div>
+                <div className={'content'}>
+                    <TabsRef ref={tabsRef} />
+                    <Switch>
+                        {
+                            routerConfig.map((routeConfig, i) => {
+                                return <Route key={i} path={routeConfig.path} render={() => <RouterBefore route={routeConfig} tabsRef={tabsRef} />} />
+                            })
+                        }
 
-                </Switch>
+                    </Switch>
+                </div>
+
             </Router>
         </div>
     )
 }
 
-function formatUrl(url) {
-    const search = url.split('?')[1];
-    if (search && search.indexOf('process') > -1) {
-        //增加特定标识
-        return {
-            pathname: '/request/processKey123' + url
-        }
-    }
-    return url
-}
 
-function RequestComp(props) {
-    const [state, setState] = useState();
-    const { processKey } = useParams()
-
-    useEffect(() => {
-        setTimeout(() => {
-            setState(processKey)
-        }, 2000)
-
-    }, [])
-
-    return <div>{state}</div>
-}
-
-
-function ComponentText(props) {
-
-    return <div>{props.text}</div>
-}
-
-export default RouterComp
+export default App
