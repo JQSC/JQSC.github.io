@@ -73,6 +73,7 @@ function View() {
         const startIndex = findNearestItemIndex(currentScrollTop, data)
         const endIndex = findNearestItemIndex(currentScrollTop + viewHeight, data)
 
+
         setViewData(data.slice(startIndex, endIndex + 1))
 
         ref.current.style.transform = `translate3d(0, ${offsetTop}px, 0)`
