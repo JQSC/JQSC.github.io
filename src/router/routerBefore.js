@@ -9,17 +9,17 @@ import { useState, useEffect } from 'react'
 function RouterBefore(props) {
     const { route, tabsRef } = props;
     const { component: Component, text, request } = route;
-    const { processKey } = useParams();
+    const { processId } = useParams();
     const history = useHistory();
     const location = useLocation()
 
     useEffect(
         () => {
             let isDestory = false;
-            //无组件，则发起请求获取path，请求发生时阻止其他跳转行为
+            //发起请求获取path
             if (request) {
-                request(processKey).then((path) => {
-                    //判断当前路由是否发生了跳转，如果没有在执行
+                request(processId).then((path) => {
+                    //根据当前组件是否被销毁判断当前路由是否发生了跳转，如果没有在执行
                     if (isDestory) return;
                     history.push(path);
                 })
@@ -36,7 +36,7 @@ function RouterBefore(props) {
                 isDestory = true;
             }
         },
-        [request, processKey, history, tabsRef, location]
+        [request, processId, history, tabsRef, location]
     )
 
     return <div>{Component ? <Component text={text} /> : 'Loading...'}</div>

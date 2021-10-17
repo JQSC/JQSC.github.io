@@ -1,13 +1,23 @@
 const routerConfig = [
     {
-        path: '/request/:processKey',
+        path: '/request/process/:processId',
         request: request,
-        text: '没有匹配的路由地址，需要异步获取path',
+        text: '需要调用指定request接口的情况',
     },
     {
-        path: '/:id(create|edit)/:id?',
+        path: '/task/edit/:id?',
         component: ComponentText,
-        text: '匹配Create、Edite以及它们带id的情况'
+        text: '创建及编辑页面'
+    },
+    {
+        path: '/task/copy/:id?',
+        component: ComponentText,
+        text: '审核页面'
+    },
+    {
+        path: '/list',
+        component: ComponentText,
+        text: '列表'
     },
     {
         path: '*',
