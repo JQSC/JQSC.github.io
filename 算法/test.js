@@ -26,6 +26,23 @@ function mergeArrar(arr1, arr2) {
     return res
 }
 
-let res=mergeArrar([1,3,5],[2,4,6])
+//let res=mergeArrar([1,3,5],[2,4,6])
 
-console.log(res);
+
+
+
+var twoSum = function (nums, target) {
+    let map = {};
+    for (let i = 0, l = nums.length; i < l; i++) {
+        let value = nums[i];
+        let mapIndex = map[target - value]
+        if (mapIndex) {
+            return [i, mapIndex].sort();
+        } else {
+            map[value] = i;
+        }
+    }
+};
+
+
+twoSum([2,7,11,15],9)

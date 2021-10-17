@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 const { TabPane } = Tabs;
 
 
-function TabsWrapper(props,ref) {
+function TabsWrapper(props, ref) {
 
     const [panes, setPanes] = useState([{ url: '/', title: 'Tab 1' }]);
 
@@ -26,6 +26,13 @@ function TabsWrapper(props,ref) {
             setPanes: setPanes,
             activeKey,
             setActiveKey: setActiveKey,
+            createTab: (tab) => {
+                const { url } = tab;
+                if (url) {
+                    setPanes([...panes, tab])
+                    setActiveKey(panes.length)
+                }
+            }
 
         }
     }, [panes, activeKey])

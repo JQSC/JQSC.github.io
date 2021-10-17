@@ -1,7 +1,7 @@
 const routerConfig = [
     {
         path: '/request/:processKey',
-        redirect: redirectRequest,
+        request: request,
         text: '没有匹配的路由地址，需要异步获取path',
     },
     {
@@ -17,7 +17,7 @@ const routerConfig = [
 ]
 
 
-function redirectRequest(processKey) {
+function request(processKey) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve("/create")
