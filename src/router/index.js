@@ -5,7 +5,7 @@ import {
     Link,
 } from "react-router-dom";
 import { useState, useRef, forwardRef } from 'react';
-import { menuConfig } from './mock'
+import { menu } from './mock'
 import routerConfig from './router.config'
 import RouterBefore from './routerBefore'
 import Tabs from './tabs'
@@ -23,7 +23,7 @@ function App() {
             <Router>
                 <div className={'menu'}>
                     {
-                        menuConfig.map((item, i) => {
+                        menu.map((item, i) => {
                             const { url, title } = item;
                             return <h2 key={i}><Link to={url} >{title}</Link></h2>
                         })

@@ -20,9 +20,13 @@ const routerConfig = [
         text: '列表'
     },
     {
-        path: '*',
+        path: '/dashboard',
         component: ComponentText,
         text: '匹配不到路由显示默认页面'
+    },
+    {
+        path: '*',
+        redirect: '/dashboard'
     }
 ]
 
@@ -30,7 +34,10 @@ const routerConfig = [
 function request(processKey) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            resolve("/create")
+            resolve({
+                status: 200,
+                path: "/task/edit/123"
+            })
         }, 2000)
     })
 }
@@ -38,5 +45,6 @@ function request(processKey) {
 function ComponentText(props) {
     return <div>{props.text}</div>
 }
+
 
 export default routerConfig

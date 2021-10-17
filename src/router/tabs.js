@@ -7,9 +7,9 @@ const { TabPane } = Tabs;
 
 function TabsWrapper(props, ref) {
 
-    const [panes, setPanes] = useState([{ url: '/', title: 'Tab 1' }]);
+    const [panes, setPanes] = useState([]);
 
-    const [activeKey, setActiveKey] = useState(0);
+    const [activeKey, setActiveKey] = useState();
 
     const history = useHistory();
 
@@ -28,9 +28,14 @@ function TabsWrapper(props, ref) {
             setActiveKey: setActiveKey,
             createTab: (tab) => {
                 const { url } = tab;
-                if (url) {
+                if (!url) return;
+                //判断页签是否已存在
+                const isExist = panes.find((item) => item.url === url);
+                if (isExist) {
+                    setActiveKey(url);
+                } else {
                     setPanes([...panes, tab])
-                    setActiveKey(panes.length)
+                    setActiveKey(url)
                 }
             }
 
@@ -45,7 +50,7 @@ function TabsWrapper(props, ref) {
             type="editable-card"
         >
             {panes.map((pane, index) => (
-                <TabPane tab={pane.title} key={index} />
+                <TabPane tab={pane.title} key={pane.url} />
             ))}
         </Tabs>
     )
