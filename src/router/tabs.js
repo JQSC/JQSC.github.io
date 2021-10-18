@@ -13,10 +13,40 @@ function TabsWrapper(props, ref) {
 
     const history = useHistory();
 
-    const onChange = (activeIndex) => {
-        let pane = panes[activeIndex];
-        if (pane && pane.url) {
-            history.push(pane.url);
+    const onChange = (path) => {
+        let isExist = panes.find((item) => item.url === path);
+        if (isExist) {
+            history.push(path);
+        }
+    }
+
+    const onDelete = (path) => {
+        //判断当前页签个数，如果只剩一个则无法删除
+        if (panes.length === 1) return;
+
+        let paneIndex = panes.findIndex((item) => item.url === path);
+        if (paneIndex > -1) {
+            let newPanes = JSON.parse(JSON.stringify(panes));
+            newPanes.splice(paneIndex, 1);
+            setPanes(newPanes);
+            //判断移除的是否是当前激活的页签
+            if (path === activeKey) {
+                let lastPane = newPanes[newPanes.length - 1];
+                history.push(lastPane.url);
+            }
+        }
+    }
+
+    const createTab = (tab) => {
+        const { url } = tab;
+        if (!url) return;
+        //判断页签是否已存在
+        const isExist = panes.find((item) => item.url === url);
+        if (isExist) {
+            setActiveKey(url);
+        } else {
+            setPanes([...panes, tab])
+            setActiveKey(url)
         }
     }
 
@@ -26,18 +56,7 @@ function TabsWrapper(props, ref) {
             setPanes: setPanes,
             activeKey,
             setActiveKey: setActiveKey,
-            createTab: (tab) => {
-                const { url } = tab;
-                if (!url) return;
-                //判断页签是否已存在
-                const isExist = panes.find((item) => item.url === url);
-                if (isExist) {
-                    setActiveKey(url);
-                } else {
-                    setPanes([...panes, tab])
-                    setActiveKey(url)
-                }
-            }
+            createTab
 
         }
     }, [panes, activeKey])
@@ -46,6 +65,7 @@ function TabsWrapper(props, ref) {
         <Tabs
             hideAdd
             onChange={onChange}
+            onEdit={onDelete}
             activeKey={activeKey}
             type="editable-card"
         >

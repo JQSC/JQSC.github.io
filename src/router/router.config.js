@@ -6,22 +6,22 @@ const routerConfig = [
     },
     {
         path: '/task/edit/:id?',
-        component: ComponentText,
+        component: TextComponent,
         text: '创建及编辑页面'
     },
     {
         path: '/task/copy/:id?',
-        component: ComponentText,
+        component: TextComponent,
         text: '审核页面'
     },
     {
         path: '/list',
-        component: ComponentText,
+        component: TextComponent,
         text: '列表'
     },
     {
         path: '/dashboard',
-        component: ComponentText,
+        component: TextComponent,
         text: '匹配不到路由显示默认页面'
     },
     {
@@ -42,7 +42,7 @@ function request(processKey) {
     })
 }
 
-function ComponentText(props) {
+function TextComponent(props) {
     return <div>{props.text}</div>
 }
 
