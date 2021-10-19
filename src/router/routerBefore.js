@@ -4,7 +4,7 @@ import {
     useLocation
 } from "react-router-dom";
 
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 function RouterBefore(props) {
     const { route, tabsRef } = props;
@@ -47,7 +47,12 @@ function RouterBefore(props) {
         [request, processId, history, tabsRef, location]
     )
 
-    return <div>{Component ? <Component text={text} /> : null}</div>
+    return (<div>
+        {Component ?
+            <React.Suspense fallback={<div>Loading</div>}>
+                <Component text={text} />
+            </React.Suspense>
+            : null}</div>)
 }
 
 

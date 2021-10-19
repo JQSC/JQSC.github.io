@@ -1,3 +1,7 @@
+import React from 'react';
+
+const TextComponent = React.lazy(() => import('./textComponent.js'));
+
 const routerConfig = [
     {
         path: '/request/process/:processId',
@@ -42,9 +46,6 @@ function request(processKey) {
     })
 }
 
-function TextComponent(props) {
-    return <div>{props.text}</div>
-}
 
 
 export default routerConfig
