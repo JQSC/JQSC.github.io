@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Router from './router/index';
 import reportWebVitals from './reportWebVitals';
+import DomToImg from './dom-to-img/index';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router />
+    <DomToImg />
   </React.StrictMode>,
   document.getElementById('root')
 );

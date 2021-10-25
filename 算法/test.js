@@ -36,8 +36,8 @@ var twoSum = function (nums, target) {
     for (let i = 0, l = nums.length; i < l; i++) {
         let value = nums[i];
         let mapIndex = map[target - value]
-        if (mapIndex) {
-            return [i, mapIndex].sort();
+        if (mapIndex !== undefined) {
+            return [mapIndex, i];
         } else {
             map[value] = i;
         }
@@ -45,4 +45,20 @@ var twoSum = function (nums, target) {
 };
 
 
-twoSum([2,7,11,15],9)
+var twoSum2 = function (nums, target) {
+    let L = 0, R = nums.length - 1;
+    while (L < R) {
+        const sum = nums[L] + nums[R];
+        if (sum === target) {
+            return [L, R];
+        } else if (sum > target) {
+            R--
+        } else if (sum > target) {
+            L++
+        }
+    }
+};
+
+let a = twoSum([2, 7, 11, 15], 9)
+
+console.log(a);
