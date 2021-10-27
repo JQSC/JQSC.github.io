@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import DomToImg from './dom-to-img/index';
+import Drop from './drop/index.js';
 
 ReactDOM.render(
   <React.StrictMode>
-    <DomToImg />
+    <Drop />
   </React.StrictMode>,
   document.getElementById('root')
 );
