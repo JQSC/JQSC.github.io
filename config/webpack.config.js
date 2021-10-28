@@ -391,6 +391,19 @@ module.exports = function (webpackEnv) {
                                 name: 'static/media/[name].[hash:8].[ext]',
                             },
                         },
+                        {
+                            test: require.resolve('jquery'),  // 此loader配置项的目标是NPM中的jquery
+                            use: [
+                                {
+                                    loader: 'expose-loader',
+                                    query: 'jQuery'
+                                },
+                                {
+                                    loader: 'expose-loader',
+                                    query: '$'
+                                }
+                            ]
+                        },
                         // Process application JS with Babel.
                         // The preset includes JSX, Flow, TypeScript, and some ESnext features.
                         {
@@ -446,7 +459,7 @@ module.exports = function (webpackEnv) {
                                     ['import', { 'libraryName': 'antd', 'libraryDirectory': 'es', 'style': 'css' }],
                                 ]
                             },
-                
+
                         },
                         // Process any JS outside of the app with Babel.
                         // Unlike the application JS, we only compile the standard ES features.
@@ -612,6 +625,14 @@ module.exports = function (webpackEnv) {
                         : undefined
                 )
             ),
+            new webpack.ProvidePlugin({
+                'React': 'react',
+                'ReactDOM': 'react-dom',
+                '$': 'jquery',
+                'jQuery': 'jquery',
+                'window.jQuery': 'jquery',
+                'window.$': 'jquery'
+            }),
             // Inlines the webpack runtime script. This script is too small to warrant
             // a network request.
             // https://github.com/facebook/create-react-app/issues/5358
