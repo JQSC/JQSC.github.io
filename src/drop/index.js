@@ -1,7 +1,6 @@
 import { Card } from 'antd'
-import { useState } from 'react'
 import './index.styl'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import $ from 'jquery'
 import DragDropContext from './DragDropContext.js'
 import DraggableAndDroppable from './DraggableAndDroppable.js'
@@ -12,64 +11,41 @@ const data = [
     { id: 3, title: '板块3', style: { background: 'white' }, component: null },
 ]
 
+
 function Drop() {
+    const [cards, setCards] = useState(data);
 
-    const [activeIndex, setActiveIndex] = useState();
-
-    const [targetIndex, setTargetIndex] = useState();
-
- 
-
-
-    const markSource = (index) => {
-        //清除所有标记
-        $('.droppable .droppable-item').css('background', 'white');
-        if (index) {
-            $('.droppable .droppable-item').eq(index - 1).css('background', 'rebeccapurple')
-        }
+    const onDragEnd = (activeIndex, targetIndex) => {
+        console.log('onDragEnd', activeIndex, targetIndex);
     }
-
-    const markTarget = (index) => {
-        //清除所有标记
-        $('.droppable .droppable-item').css('border', 'none');
-        if (index) {
-            $('.droppable .droppable-item').eq(index - 1).css('border-left', '1px solid red');
-        }
-    }
-
-    useEffect(() => {
-        markSource(activeIndex);
-    }, [activeIndex])
-
-    useEffect(() => {
-        markTarget(targetIndex);
-    }, [targetIndex])
-
 
     return (
         <div className={'card-drop'}>
             <div className={'droppable'} >
-                <DragDropContext>
+                <DragDropContext onDragEnd={onDragEnd}>
                     {
-                        data.map((item) => {
+                        cards.map((item) => {
                             const { title, id } = item;
                             return (
-                                <DraggableAndDroppable key={id}>
+                                <DraggableAndDroppable key={id} index={id}>
                                     {
                                         (provided) => (
-                                            <Card
-                                                title={title}
-                                                bordered={false}
-                                                className={'droppable-item'}
+                                            <div
                                                 ref={provided.innerRef}
                                                 {...provided.draggableProps}
                                             >
-                                                <p>{id}</p>
-                                            </Card>
+                                                <Card
+                                                    title={title}
+                                                    bordered={false}
+                                                    className={'droppable-item'}
+                                                >
+                                                    <p>{id}</p>
+                                                </Card>
+                                            </div>
+
                                         )
                                     }
                                 </DraggableAndDroppable>
-
                             )
                         })
                     }

@@ -1,43 +1,68 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import $ from 'jquery'
 
-export const DragDropContext = React.createContext({ activeIndex: 0, targetIndex: 0 });
+export const DragDropContext = React.createContext({});
 
 function DragDrop(props) {
 
-    const [activeIndex, setActiveIndex] = useState();
+    const [source, setSource] = useState();
 
-    const [targetIndex, setTargetIndex] = useState();
+    const [target, setTarget] = useState();
 
+    const cacheRef = useRef([]);
 
-    const markSource = (index) => {
+    const setData = (o) => {
+        cacheRef.current.push(o);
+    }
+
+    const onDragEnd = (e) => {
+        props.onDragEnd(source.index, target.index);
+        setSource(null);
+        setTarget(null);
+    }
+
+    const clearSource = () => {
         //清除所有标记
-        $('.droppable .droppable-item').css('background', 'white');
-        if (index) {
-            $('.droppable .droppable-item').eq(index - 1).css('background', 'rebeccapurple')
+        for (let item of cacheRef.current) {
+            $(item.ref.current).css('background', 'white')
         }
     }
 
-    const markTarget = (index) => {
+    const clearTarget = () => {
         //清除所有标记
-        $('.droppable .droppable-item').css('border', 'none');
-        if (index) {
-            $('.droppable .droppable-item').eq(index - 1).css('border-left', '1px solid red');
+        for (let item of cacheRef.current) {
+            $(item.ref.current).css('border', 'none')
         }
     }
 
-    useEffect(() => {
-        markSource(activeIndex);
-    }, [activeIndex])
+    const markSource = (current) => {
+        clearSource()
+        $(current).css('background', 'rebeccapurple')
+    }
+
+    const markTarget = (current) => {
+        clearTarget();
+        $(current).css('border-left', '1px solid red');
+    }
 
     useEffect(() => {
-        markTarget(targetIndex);
-    }, [targetIndex])
+        if (source){
+            markSource(source.ref.current);
+        }else{clearSource()}
+    }, [source])
+
+    useEffect(() => {
+        if (target){
+            markTarget(target.ref.current);
+        }else{
+            clearTarget()
+        }
+    }, [target])
 
 
     return (
-        <DragDropContext.Provider value={[{ activeIndex, targetIndex }, setActiveIndex, setTargetIndex]}>
+        <DragDropContext.Provider value={[{ source, target }, setSource, setTarget, setData, onDragEnd]}>
             {props.children}
         </DragDropContext.Provider>
     )
