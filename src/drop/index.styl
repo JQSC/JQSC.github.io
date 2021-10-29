@@ -1,10 +1,28 @@
-.card-drop
+.cards-wrapper
      padding: 30px;
      background: #ececec;
-     .droppable
+     .cards
         display: flex
         flex-wrap: wrap
         overflow hidden
-        .droppable-item
-            width 300px
+        .card
             margin 20px
+            overflow hidden
+            .card-body
+                width 200px
+                
+    .ant-drawer-body
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+.drag-source
+    display: none
+.drag-target
+    background-color: #fafafa;
+    border: 1px dashed blue;
+    border-radius: 2px;
+    cursor: pointer;
+.drag-target-border
+    border-left: 2px solid red    
+
