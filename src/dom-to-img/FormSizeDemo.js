@@ -19,6 +19,8 @@ const FormSizeDemo = () => {
     setComponentSize(size);
   };
 
+  return ( <div className={'test'}>test</div>)
+
   return (
     <>
       <Form
@@ -35,6 +37,7 @@ const FormSizeDemo = () => {
         onValuesChange={onFormLayoutChange}
         size={componentSize}
       >
+          <video src='https://www.w3school.com.cn/i/movie.ogg' controls="controls"></video>
         <Form.Item label="Form Size" name="size">
           <Radio.Group>
             <Radio.Button value="small">Small</Radio.Button>

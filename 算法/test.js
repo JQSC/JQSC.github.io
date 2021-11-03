@@ -59,6 +59,57 @@ var twoSum2 = function (nums, target) {
     }
 };
 
-let a = twoSum([2, 7, 11, 15], 9)
+//let a = twoSum([2, 7, 11, 15], 9)
 
-console.log(a);
+//二分法
+//寻找target在数组里的左右边界
+//[1,2,2,4,6,7,8]目标值2
+
+//寻找右边界大于target的位置 -1 
+function getRightBoard(nums, target) {
+    let l = 0, r = nums.length - 1;//区间左闭右闭
+
+    while (l <= r) {
+        const mid = l + (r - l) >>> 1;
+        if (nums[mid] > target) {
+            //包含mid [l,mid]
+            r = mid
+        } else {
+            //不包含mid [mid+1,r]
+            l = mid + 1
+        }
+    }
+
+    return r
+}
+
+//[1,2,2,4,6,7,8]目标值2
+//寻找左边界小于target的位置 +1 
+function getLeftBoard(nums, target) {
+    let l = 0, r = nums.length - 1;//区间左闭右闭
+
+    while (l <= r) {
+        const mid = l + (r - l) >>> 1;
+        if (nums[mid] >= target) {
+            //不包含mid [l,mid-1]
+            r = mid - 1
+        }else{
+            //包含mid [mid,r]
+            l = mid+1
+        }
+    }
+    
+    return l
+}
+
+
+
+
+function searchRange() {
+    let nums = [1, 2, 2, 4, 6, 7, 8];
+    let target = 2;
+    let l = getLeftBoard(nums, target);
+    let r = getRightBoard(nums, target);
+    console.log(1111111,l, r)
+}
+searchRange()
