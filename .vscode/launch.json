@@ -7,6 +7,15 @@
         {
             "type": "pwa-node",
             "request": "launch",
+            "name": "二分法",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\算法\\二分法.js"
+        },
+        {
+            "type": "pwa-node",
+            "request": "launch",
             "name": "Launch Program",
             "skipFiles": [
                 "<node_internals>/**"

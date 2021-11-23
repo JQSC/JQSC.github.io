@@ -59,6 +59,73 @@ var twoSum2 = function (nums, target) {
     }
 };
 
-let a = twoSum([2, 7, 11, 15], 9)
+// let a = twoSum([2, 7, 11, 15], 9)
 
-console.log(a);
+// console.log(a);
+
+var l1 = {
+    val: 2,
+    next: {
+        val: 4,
+        next: {
+            val: 3,
+            next: null
+        }
+    }
+}
+
+var l2 = {
+    val: 5,
+    next: {
+        val: 6,
+        next: {
+            val: 4,
+            next: null
+        }
+    }
+}
+
+function ListNode(val, next) {
+    this.val = (val === undefined ? 0 : val)
+    this.next = (next === undefined ? null : next)
+}
+
+var addTwoNumbers = function (l1, l2) {
+    let head = null
+    let next = null
+    let n = 0;
+    while (l1 || l2) {
+        let v1 = 0, v2 = 0
+        if (l1) v1 = l1.val
+        if (l2) v2 = l2.val
+        let val = parseInt(v1) + parseInt(v2) + parseInt(n);
+        if (val >= 10) {
+            n = 1
+            val = val % 10
+        }else{
+            n=0
+        }
+        console.log('val', val);
+
+        if (head) {
+            next.next = new ListNode(val, null)
+            next = next.next
+        } else {
+            head = new ListNode(val, null)
+            next = head
+        }
+        l1 = l1 && l1.next
+        l2 = l2 && l2.next
+    }
+    console.log('n',n);
+    
+    if (n = 1) {
+        next.next = new ListNode(1, null)
+    }
+    
+    console.log(head.next);
+    return head
+};
+
+
+addTwoNumbers(l1, l2)
