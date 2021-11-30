@@ -59,7 +59,6 @@ var twoSum2 = function (nums, target) {
     }
 };
 
-<<<<<<< HEAD
 // let a = twoSum([2, 7, 11, 15], 9)
 
 // console.log(a);
@@ -157,7 +156,6 @@ function formatArrToTree(arr) {
 }
 
 formatArrToTree(arr)
-=======
 //let a = twoSum([2, 7, 11, 15], 9)
 
 //二分法
@@ -328,4 +326,3 @@ var search = function (nums, target) {
     return -1
 };
 console.log(search([1, 3], 3))
->>>>>>> 9597f9eab8b44468aa582ebe3cf5f7a148e762b3
