@@ -102,8 +102,8 @@ var addTwoNumbers = function (l1, l2) {
         if (val >= 10) {
             n = 1
             val = val % 10
-        }else{
-            n=0
+        } else {
+            n = 0
         }
         console.log('val', val);
 
@@ -117,15 +117,42 @@ var addTwoNumbers = function (l1, l2) {
         l1 = l1 && l1.next
         l2 = l2 && l2.next
     }
-    console.log('n',n);
-    
+    console.log('n', n);
+
     if (n = 1) {
         next.next = new ListNode(1, null)
     }
-    
+
     console.log(head.next);
     return head
 };
 
 
-addTwoNumbers(l1, l2)
+//addTwoNumbers(l1, l2)
+
+let arr = [
+    { id: 1, name: '部门1', pid: 0 },
+    { id: 2, name: '部门2', pid: 1 },
+    { id: 3, name: '部门3', pid: 1 },
+    { id: 4, name: '部门4', pid: 3 },
+    { id: 5, name: '部门5', pid: 4 },
+]
+
+
+function formatArrToTree(arr) {
+
+    let map = {}
+
+    for (let i = 0; i < arr.length; i++) {
+        let { id, pid } = arr[i];
+        if (map[pid]) {
+            map[pid].children = map[pid].children || [];
+            map[pid].children.push(arr[i])
+        }
+        if (!map[id]) map[id] = arr[i]
+    }
+
+    console.log(map)
+}
+
+formatArrToTree(arr)
