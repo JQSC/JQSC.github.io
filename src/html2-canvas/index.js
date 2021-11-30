@@ -1,6 +1,7 @@
 import { Button, Tabs } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
 import domtoimage from 'dom-to-image';
+import html2canvas from 'html2canvas';
 import { useEffect, useState } from 'react';
 import FormSizeDemo from './FormSizeDemo.js'
 import Iframe from './Iframe'
@@ -23,6 +24,14 @@ function DomToImg() {
 
         return node
     }
+
+
+    function convertCanvasToImage(canvas) {
+        var image = new Image();
+        image.src = canvas.toDataURL("image/png");
+        return image;
+    }
+
     const createImg = () => {
         let node = ''
         if (activeIndex == '1') {
@@ -33,24 +42,18 @@ function DomToImg() {
             node = document.getElementsByClassName('dom')[activeIndex];
         }
 
-        console.log('node2111', node)
+        console.log('node',node);
+        
+        html2canvas(node).then(function (canvas) {
+            let imgWrapper = document.getElementsByClassName('component' + activeIndex)[0];
+            // imgWrapper.innerHTML = ''
+            let image=convertCanvasToImage(canvas)
+            imgWrapper.appendChild(image);
+            setVisible(true);
 
-        domtoimage.toPng(node, {
-            //nodeWindow: window,
-            filter: callback
-        })
-            .then(function (dataUrl) {
-                let imgWrapper = document.getElementsByClassName('component' + activeIndex)[0];
-                let img = new Image();
-                img.src = dataUrl;
-                imgWrapper.innerHTML = ''
-                imgWrapper.appendChild(img);
-                setDataUrl(dataUrl);
-                setVisible(true);
-            })
-            .catch(function (error) {
-                console.error('oops, something went wrong!', error);
-            });
+            
+
+        });
     }
 
     const download = () => {

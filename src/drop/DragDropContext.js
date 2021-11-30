@@ -17,46 +17,47 @@ function DragDrop(props) {
     }
 
     const onDragEnd = (e) => {
-        props.onDragEnd(source.index, target.index);
+        if (source && typeof source.index !== 'undefined' && target && typeof target.index !== 'undefined') {
+            props.onDragEnd(source.index, target.index);
+        }
         setSource(null);
         setTarget(null);
     }
 
+    //source相关
     const clearSource = () => {
-        //清除所有标记
         for (let item of cacheRef.current) {
-            $(item.ref.current).css('background', 'white')
-        }
-    }
-
-    const clearTarget = () => {
-        //清除所有标记
-        for (let item of cacheRef.current) {
-            $(item.ref.current).css('border', 'none')
+            $(item.ref.current).removeClass('drag-source')
         }
     }
 
     const markSource = (current) => {
-        clearSource()
-        $(current).css('background', 'rebeccapurple')
+        clearSource();
+        $(current).addClass('drag-source')
+    }
+
+    //target相关
+    const clearTarget = () => {
+        $('.drag-target').remove();
+        for (let item of cacheRef.current) {
+            $(item.ref.current).removeClass('drag-target-border')
+        }
     }
 
     const markTarget = (current) => {
         clearTarget();
-        $(current).css('border-left', '1px solid red');
+        const sourceWidth = $(source.ref.current).width();
+        $(current).before(`<div class="card drag-target" style="width:${sourceWidth}px"></div>`);
+        $(current).addClass('drag-target-border');
     }
 
     useEffect(() => {
-        if (source){
+        if (target) {
             markSource(source.ref.current);
-        }else{clearSource()}
-    }, [source])
-
-    useEffect(() => {
-        if (target){
             markTarget(target.ref.current);
-        }else{
-            clearTarget()
+        } else {
+            clearSource();
+            clearTarget();
         }
     }, [target])
 
