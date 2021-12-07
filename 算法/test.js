@@ -266,8 +266,8 @@ var search2 = function (nums, target) {
             l = mid + 1
         }
     }
-    console.log('left',l);
-    
+    console.log('left', l);
+
     //判断区间
     if (target <= nums[nums.length - 1]) {
         r = nums.length - 1
@@ -294,7 +294,7 @@ var search = function (nums, target) {
     //寻找旋转点
     let l = 0, r = nums.length - 1;
     while (l < r) {
-        
+
         let mid = l + (r - l >>> 1);
 
         if (nums[mid] <= nums[0]) {
@@ -303,8 +303,8 @@ var search = function (nums, target) {
             l = mid + 1
         }
     }
-    console.log('left',l);
-    
+    console.log('left', l);
+
     //判断区间
     if (target <= nums[nums.length - 1]) {
         r = nums.length - 1
@@ -325,4 +325,44 @@ var search = function (nums, target) {
     }
     return -1
 };
-console.log(search([1, 3], 3))
+//console.log(search([1, 3], 3))
+
+
+//给你一个已经升序排列的数组，给一个数字，找一下这个数字在这个数组里出现了几次
+
+function finds(arr, target) {
+
+    let left = 0, right = arr.length;
+
+    while (left <= right) {
+        let mid = parseInt(arr.length / 2);
+        if (arr[mid] === target) {
+            return mid
+        }
+
+        if (arr[mid] > target) {
+            right = mid - 1
+        } else {
+            left = mid + 1
+        }
+    }
+
+    let res = 0
+
+    let nums = left
+    while (arr[nums] === target) {
+        nums--
+        res++
+    }
+
+    nums = left
+    while (arr[nums] === target) {
+        nums++
+        res++
+    }
+
+    return res
+
+}
+
+console.log('finds',finds([1,2,2,3,3,5,8,9],2))

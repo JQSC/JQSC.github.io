@@ -6,6 +6,7 @@
     "configurations": [
 
 
+
         {
             "type": "pwa-node",
             "request": "launch",
@@ -32,6 +33,15 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}\\算法\\test.js"
+        },
+        {
+            "type": "pwa-node",
+            "request": "launch",
+            "name": "重复数字出现的次数",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\算法\\重复数字出现的次数.js"
         },
         {
             "type": "pwa-node",
