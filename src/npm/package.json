@@ -1,8 +1,0 @@
-{
-    "name": "1111",
-    "version": "1.0.0",
-    "devDependencies": {
-        "@chishengqi/test": "^1.0.0",
-        "jquery": "^3.6.0"
-    }
-}
