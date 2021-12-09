@@ -7,3 +7,28 @@
         .list
             width 400px
             margin: 20px
+    .diff-html
+        margin: 20px
+        width 840px
+
+    .cg-diff-paragraph   
+        border-left: 3px solid #faad14;
+        padding-left: 6px;     
+        .cg-diff-delete
+            background-color: #fff1f0;
+            padding-right: 4px;
+            &::before
+                content: "-";
+                padding: 0 4px;
+                font-weight: 400;
+                color: #8c8c8c;
+    
+        .cg-diff-add
+            text-decoration: none;
+            background-color: rgba(37,184,100,.15);
+            padding-right: 4px;
+            &::before
+                content: "+";
+                padding: 0 4px;
+                font-weight: 400;
+                color: #8c8c8c;
