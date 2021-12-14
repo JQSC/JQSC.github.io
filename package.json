@@ -166,6 +166,7 @@
     ]
   },
   "devDependencies": {
+    "express": "^4.17.1",
     "stylus": "^0.55.0",
     "stylus-loader": "^3.0.1"
   }
