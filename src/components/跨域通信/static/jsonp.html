@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sub</title>
+</head>
+
+<body>
+    sub
+    <script src="http://parent.chishengqi.com/parent?fn=test"></script>
+    <script>
+        //服务端
+        // if (url === '/parent?fn=test') {
+        //     res.writeHead(200, { 'Content-Type': 'text/javascript' })
+        //     res.end('function test(){console.log("hello world")}')
+        // }
+        //客户端
+        window.onload = function () {
+            console.log('fn', test)
+        }
+    </script>
+</body>
+
+</html>

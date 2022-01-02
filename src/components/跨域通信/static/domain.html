@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sub</title>
+</head>
+
+<body>
+    <iframe src="http://parent.chishengqi.com/parent.html" id="iframe"></iframe>
+    sub
+    <script>
+        document.domain = 'chishengqi.com'
+        console.log('old localstrong', window.localStorage.getItem('test'))
+        console.log('old cookie', document.cookie)
+
+        //domain
+        let ifr = document.getElementById('iframe');
+
+        ifr.onload = function () {
+            let contentWindow = ifr.contentWindow;
+            console.log('new localstrong', contentWindow.localStorage)
+            console.log('new cookie', contentWindow.document.cookie)
+        }
+
+    </script>
+
+</body>
+
+</html>
