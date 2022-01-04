@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parent</title>
+</head>
+
+<body>
+    parent
+    <script>
+        document.domain = 'chishengqi.com'
+        window.localStorage.setItem('test', 444444)
+        document.cookie = "name=chi1111";
+        
+        function receiveMessage(event) {
+            event.source.postMessage(document.cookie,'http://sub.chishengqi.com');
+        }
+        window.addEventListener("message", receiveMessage, false);
+    </script>
+
+</body>
+
+</html>

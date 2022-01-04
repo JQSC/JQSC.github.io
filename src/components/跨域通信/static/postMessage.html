@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sub</title>
+</head>
+
+<body>
+    <iframe src="http://parent.chishengqi.com/index.html" id="iframe"></iframe>
+    sub
+    <script>
+
+        let ifr = document.getElementById('iframe');
+
+        iframe.onload = function () {
+            // 向domain2发送跨域数据
+            iframe.contentWindow.postMessage('来自domain1的消息','http://parent.chishengqi.com');
+        }
+
+        function receiveMessage(event) {
+            console.log('event', event)
+        }
+
+        window.addEventListener("message", receiveMessage, false);
+
+
+    </script>
+
+</body>
+
+</html>
