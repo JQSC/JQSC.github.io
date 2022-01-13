@@ -26,7 +26,7 @@ const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-
+const PrerenderSPAPlugin = require('prerender-spa-plugin')
 const postcssNormalize = require('postcss-normalize');
 
 const appPackageJson = require(paths.appPackageJson);
@@ -633,6 +633,21 @@ module.exports = function (webpackEnv) {
                 'jQuery': 'jquery',
                 'window.jQuery': 'jquery',
                 'window.$': 'jquery'
+            }),
+            new PrerenderSPAPlugin({
+                // Required - The path to the webpack-outputted app to prerender.
+                staticDir: path.join(__dirname, '../build'),
+                // Required - Routes to render.
+                routes: ['/', '/1'],
+                renderer: new PrerenderSPAPlugin.PuppeteerRenderer({
+                    inject: {
+                        _m: 'prerender'
+                    },
+                    // 渲染时显示浏览器窗口，调试时有用
+                    headless: true,
+                    // 等待触发目标时间后，开始预渲染
+                    renderAfterDocumentEvent: 'render-event'
+                })
             }),
             // Inlines the webpack runtime script. This script is too small to warrant
             // a network request.
