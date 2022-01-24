@@ -28,6 +28,7 @@ const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const PrerenderSPAPlugin = require('prerender-spa-plugin')
 const postcssNormalize = require('postcss-normalize');
+const CopyPlugin = require("copy-webpack-plugin");
 
 const appPackageJson = require(paths.appPackageJson);
 
@@ -600,6 +601,13 @@ module.exports = function (webpackEnv) {
             ],
         },
         plugins: [
+            // new CopyPlugin([
+            //     {
+            //         from: path.join(__dirname, './jest'),
+            //         to: path.join(__dirname, '../build/jest'),
+                  
+            //     }
+            // ]),
             // Generates an `index.html` file with the <script> injected.
             new HtmlWebpackPlugin(
                 Object.assign(

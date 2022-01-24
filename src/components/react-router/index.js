@@ -18,6 +18,7 @@ function App() {
     }
 
     useEffect(() => {
+        console.log('render useEffect')
         document.dispatchEvent(new Event('render-event'))
     }, [])
 
