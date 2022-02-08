@@ -62,13 +62,14 @@
     "postcss-normalize": "8.0.1",
     "postcss-preset-env": "6.7.0",
     "postcss-safe-parser": "5.0.2",
+    "prerender-spa-plugin": "^3.4.0",
     "prompts": "2.4.0",
     "react": "^17.0.2",
     "react-app-polyfill": "^2.0.0",
     "react-beautiful-dnd": "^13.1.0",
     "react-dev-utils": "^11.0.3",
-    "react-refresh": "^0.8.3",
     "react-dom": "^16.8.4",
+    "react-refresh": "^0.8.3",
     "react-router": "^5.2.1",
     "react-router-dom": "^6.2.1",
     "resolve": "1.18.1",
@@ -166,6 +167,7 @@
     ]
   },
   "devDependencies": {
+    "copy-webpack-plugin": "^5.1.2",
     "express": "^4.17.1",
     "stylus": "^0.55.0",
     "stylus-loader": "^3.0.1"

@@ -7,12 +7,12 @@ import reportWebVitals from './reportWebVitals';
 // import Html2Canvas from './html2-canvas/index'
 //import ErrorBoundary from './error-boundary/index'
 // import DiffText from './components/diff-text/index'
-// import ReactRouter from './components/react-router/index'
-import Hook from './components/hooks/index'
+import ReactRouter from './components/react-router/index'
+// import Hook from './components/hooks/index'
 
 ReactDOM.render(
     <React.StrictMode>
-        <Hook />
+        <ReactRouter />
     </React.StrictMode>,
     document.getElementById('root')
 );
