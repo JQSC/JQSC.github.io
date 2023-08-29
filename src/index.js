@@ -3,16 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 // import Drop from './drop/index.js';
-// import DomToImg from './dom-to-img/index'
+import DomToImg from './components/dom-to-img/index'
 // import Html2Canvas from './html2-canvas/index'
 //import ErrorBoundary from './error-boundary/index'
 // import DiffText from './components/diff-text/index'
-import ReactRouter from './components/react-router/index'
+// import ReactRouter from './components/react-router/index'
 // import Hook from './components/hooks/index'
-
+import InputKeepOut from './components/InputKeepOut/index'
 ReactDOM.render(
     <React.StrictMode>
-        <ReactRouter />
+      <div className='page'>
+        <InputKeepOut />
+      </div>
     </React.StrictMode>,
     document.getElementById('root')
 );
