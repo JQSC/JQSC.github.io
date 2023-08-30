@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 // import Drop from './drop/index.js';
-import DomToImg from './components/dom-to-img/index'
+// import DomToImg from './components/dom-to-img/index'
 // import Html2Canvas from './html2-canvas/index'
 //import ErrorBoundary from './error-boundary/index'
 // import DiffText from './components/diff-text/index'
