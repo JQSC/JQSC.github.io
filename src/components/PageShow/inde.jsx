@@ -44,7 +44,7 @@ const PageShow = () => {
 			</div>
       <div>performance type: {type}</div>
 			<div>page show: {count}</div>
-			<div>persisted :{persisted}</div>
+			<div>persisted :{persisted?1:0}</div>
 		</div>
 	);
 };
