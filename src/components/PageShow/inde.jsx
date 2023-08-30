@@ -2,7 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 // import './index.less'
 
 const PageShow = () => {
+  const [type,setType]=useState(0)
 	const [count, setCount] = useState(0);
+	const [persisted, setPersisted] = useState(false);
 	useEffect(() => {
 		// window.addEventListener('pageshow', (event) => {
 		//   console.log('after , pageshow :', event)
@@ -12,15 +14,11 @@ const PageShow = () => {
 		window.addEventListener(
 			'pageshow',
 			function (event) {
-				// console.log("监听pageshow");
-				alert('咦？就知道你会回来的！');
-				// if (
-				// 	event.persisted ||
-				// 	(window.performance && window.performance.navigation?.type == 2)
-				// ) {
-				// 	alert('咦？就知道你会回来的！');
-				// }
-				setCount(count + 1);
+				console.log('PageShow Event  ' + event.persisted);
+				setPersisted(event.persisted);
+        setCount(count + 1);
+        setType(window.performance.navigation.type)
+				
 			},
 			false
 		);
@@ -44,7 +42,9 @@ const PageShow = () => {
 				<h2>打开新页面</h2>
 				<button onClick={handleClicl2}>打开</button>
 			</div>
+      <div>performance type: {type}</div>
 			<div>page show: {count}</div>
+			<div>persisted :{persisted}</div>
 		</div>
 	);
 };
