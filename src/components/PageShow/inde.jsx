@@ -32,6 +32,14 @@ const PageShow = () => {
 		window.open('https://mc.liepin.com/account/edittel/');
 	};
 
+  const handleClicl3=()=>{
+    window.location.href="lptd://lp/p/workExp?params={\"workId\":200030369660,\"resId\":\"2178fd929788X39ff294e5b91\"}"
+  }
+
+  const handleClick4=()=>{
+    window.location.reload()
+  }
+
 	return (
 		<div>
 			<div>
@@ -41,6 +49,14 @@ const PageShow = () => {
 			<div>
 				<h2>打开新页面</h2>
 				<button onClick={handleClicl2}>打开</button>
+			</div>
+      <div>
+				<h2>跳转原生页面</h2>
+				<button onClick={handleClicl3}>打开</button>
+			</div>
+      <div>
+				<h2>刷新页面</h2>
+				<button onClick={handleClick4}>刷新</button>
 			</div>
       <div>performance type: {type}</div>
 			<div>page show: {count}</div>
