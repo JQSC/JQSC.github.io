@@ -9,11 +9,12 @@ import reportWebVitals from './reportWebVitals';
 // import DiffText from './components/diff-text/index'
 // import ReactRouter from './components/react-router/index'
 // import Hook from './components/hooks/index'
-import InputKeepOut from './components/InputKeepOut/index'
+// import InputKeepOut from './components/InputKeepOut/index'
+import PageShow from './components/PageShow/inde';
 ReactDOM.render(
     <React.StrictMode>
       <div className='page'>
-        <InputKeepOut />
+        <PageShow />
       </div>
     </React.StrictMode>,
     document.getElementById('root')
