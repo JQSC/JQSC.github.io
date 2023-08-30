@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import './index.styl';
+import './index.scss';
 
 const InputKeepOut = () => {
 	useEffect(() => {
