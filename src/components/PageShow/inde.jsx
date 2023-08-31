@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 // import './index.less'
 
 const PageShow = () => {
@@ -22,7 +22,7 @@ const PageShow = () => {
 			},
 			false
 		);
-	}, []);
+	}, [count]);
 
 	const handleClick = () => {
 		window.location.href = 'https://mc.liepin.com/vip';
